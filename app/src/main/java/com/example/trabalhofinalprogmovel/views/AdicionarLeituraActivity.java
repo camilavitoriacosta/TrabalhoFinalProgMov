@@ -22,6 +22,8 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
         binding = ActivityAdicionarLeituraBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        intent = new Intent(this, AdicionarLivroActivity.class);
+
         ehTelaDeCadastroLeitura = getIntent().getBooleanExtra("adicionar_leitura", true);
         idLeitura = getIntent().getIntExtra("id_leitura", -1);
         idDesejo = getIntent().getIntExtra("id_desejo", -1);
@@ -86,6 +88,13 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        binding.adicionarLivro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(intent);
             }
         });
 

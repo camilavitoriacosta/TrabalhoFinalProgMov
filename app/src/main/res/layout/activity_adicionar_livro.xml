@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.AdicionarLeituraActivity">
+    tools:context=".views.AdicionarLivroActivity">
 
     <TextView
-        android:id="@+id/titulo3"
+        android:id="@+id/titulo4"
         android:layout_width="370sp"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
@@ -27,74 +27,61 @@
         android:id="@+id/linearLayout"
         android:layout_width="370sp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100sp"
+        android:layout_marginTop="50sp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/titulo3">
+        app:layout_constraintTop_toBottomOf="@+id/titulo4">
 
         <TextView
-            android:id="@+id/campoLivro"
+            android:id="@+id/tituloLivroCampo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/livro"
+            android:text="@string/tituloLivro"
+            android:textColor="@color/roxo_escuro"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/editTextTextPersonName2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Digite o titulo"
+            android:layout_marginBottom="10sp"/>
+
+        <TextView
+            android:id="@+id/generoCampo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/genero"
             android:textColor="@color/roxo_escuro"
             android:textSize="18sp"
             android:textStyle="bold"/>
 
         <Spinner
-            android:id="@+id/spinnerLivro"
+            android:id="@+id/spinnerGeneroLivro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10sp" />
+            android:layout_marginBottom="10sp"/>
 
         <TextView
-            android:id="@+id/adicionarLivro"
+            android:id="@+id/paginasCampo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10sp"
-            android:clickable="true"
-            android:text="@string/naoencontrou"
-            android:textAllCaps="false"
-            android:textColor="@color/purple_200"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/campoComentario"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/comentario"
+            android:text="@string/paginas"
             android:textColor="@color/roxo_escuro"
             android:textSize="18sp"
             android:textStyle="bold"/>
 
         <EditText
-            android:id="@+id/comentarioInput"
+            android:id="@+id/paginasInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20sp"
             android:ems="10"
-            android:hint="Digite um comentário"
-            android:inputType="textPersonName" />
-
-        <TextView
-            android:id="@+id/campoNota"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/nota"
-            android:textColor="@color/roxo_escuro"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
-
-        <EditText
-            android:id="@+id/notaInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10sp"
-            android:ems="10"
-            android:hint="Insira uma nota"
-            android:inputType="number" />
+            android:inputType="number"
+            android:layout_marginBottom="10sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -121,16 +108,7 @@
             app:strokeWidth="1sp" />
 
         <Button
-            android:id="@+id/excluirbtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5sp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/roxo_escuro"
-            android:text="@string/excluir" />
-
-        <Button
-            android:id="@+id/cadastroBtn"
+            android:id="@+id/cadastroLivroBtn"
             android:layout_width="370sp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5sp"

@@ -22,6 +22,8 @@
     <string name="livro">Livro</string>
     <string name="comentario">Comentário</string>
     <string name="naoencontrou">Não encontrou seu livro? Adicionar</string>
+    <string name="tituloLivro">Titulo</string>
+    <string name="paginas">Quantidade de páginas</string>
 
     <string name="livrosLidos">Quantidade de livros lidos:</string>
     <string name="paginasLidas">Quantidade de páginas lidas:</string>
