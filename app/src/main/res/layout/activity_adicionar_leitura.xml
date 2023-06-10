@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.AdicionarLeituraActivity">
+
+    <TextView
+        android:id="@+id/titulo3"
+        android:layout_width="370sp"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/titulo"
+        android:textAlignment="center"
+        android:textColor="@color/roxo_escuro"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.609"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.066" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="370sp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100sp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/titulo3">
+
+        <TextView
+            android:id="@+id/campoLivro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/livro"
+            android:textColor="@color/roxo_escuro"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <Spinner
+            android:id="@+id/spinnerLivro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10sp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10sp"
+            android:text="@string/naoencontrou"
+            android:textAllCaps="false"
+            android:textColor="@color/purple_200"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/campoComentario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/comentario"
+            android:textColor="@color/roxo_escuro"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/comentarioInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20sp"
+            android:ems="10"
+            android:hint="Digite um comentário"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/campoNota"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/nota"
+            android:textColor="@color/roxo_escuro"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/notaInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10sp"
+            android:ems="10"
+            android:hint="Insira uma nota"
+            android:inputType="number" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/botoesLinearLayout"
+        android:layout_width="370sp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <Button
+            android:id="@+id/cancelarBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5sp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:text="@string/cancelar"
+            android:textColor="@color/roxo_escuro"
+            app:strokeColor="@color/roxo_escuro"
+            app:strokeWidth="1sp" />
+
+        <Button
+            android:id="@+id/excluirbtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5sp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/roxo_escuro"
+            android:text="@string/excluir" />
+
+        <Button
+            android:id="@+id/cadastroBtn"
+            android:layout_width="370sp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5sp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/roxo_escuro"
+            android:text="@string/adicionar" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

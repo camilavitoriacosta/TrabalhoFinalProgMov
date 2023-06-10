@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.trabalhofinalprogmovel.R;
 import com.example.trabalhofinalprogmovel.databinding.ActivityUsuarioCadastroBinding;
 
 public class UsuarioCadastro extends AppCompatActivity {
@@ -27,7 +28,7 @@ public class UsuarioCadastro extends AppCompatActivity {
             binding.retomarJornadaBtn.setVisibility(View.GONE);
             if(idLeitor >= 0){
                 carregarInformacoesLeitor();
-                // setar texto botao para editar
+                binding.iniciarJornadaBtn.setText(getString(R.string.editar));
             }
         }
         else{
@@ -40,8 +41,14 @@ public class UsuarioCadastro extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // verificar campos vazios
-                // cadastrar usuario e obter usuario cadastrado
-                // mandar id para proxima tela
+                if(idLeitor >= 0){
+                    // atualizar usuario
+                }
+                else {
+                    // cadastrar usuario e obter usuario cadastrado
+                    // mandar id para proxima tela
+                }
+
                 int idLeitor = 0;
                 intent.putExtra("id_leitor", idLeitor);
                 startActivity(intent);

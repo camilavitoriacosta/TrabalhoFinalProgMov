@@ -12,6 +12,9 @@
         android:theme="@style/Theme.TrabalhoFinalProgMovel"
         tools:targetApi="31">
         <activity
+            android:name=".AdicionarLeituraActivity"
+            android:exported="false" />
+        <activity
             android:name=".views.ListaActivity"
             android:exported="false" />
         <activity
