@@ -1,4 +1,4 @@
-package com.example.trabalhofinalprogmovel;
+package com.example.trabalhofinalprogmovel.views;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,7 +12,7 @@ public class UsuarioCadastro extends AppCompatActivity {
     private ActivityUsuarioCadastroBinding binding;
     private Intent intent;
     private boolean ehTelaDeCadastro;
-
+    private int idLeitor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,10 +20,15 @@ public class UsuarioCadastro extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         ehTelaDeCadastro = getIntent().getBooleanExtra("cadastro", true);
+        idLeitor = getIntent().getIntExtra("id_leitor", -1);
         intent = new Intent(this, PerfilActivity.class);
 
         if(ehTelaDeCadastro) {
             binding.retomarJornadaBtn.setVisibility(View.GONE);
+            if(idLeitor >= 0){
+                carregarInformacoesLeitor();
+                // setar texto botao para editar
+            }
         }
         else{
             binding.iniciarJornadaBtn.setVisibility(View.GONE);
@@ -54,5 +59,9 @@ public class UsuarioCadastro extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    protected void carregarInformacoesLeitor(){
+        // buscar leitor pelo id
     }
 }

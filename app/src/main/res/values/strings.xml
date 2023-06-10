@@ -10,9 +10,14 @@
     <string name="campo_senha">Senha</string>
 
     <string name="editar">Editar</string>
+    <string name="adicionar">Adicionar</string>
+    <string name="cancelar">Cancelar</string>
+
     <string name="dashboard">Dashboard</string>
     <string name="leituras">Leituras</string>
     <string name="listaDeDesejos">Lista de Desejos</string>
+    <string name="genero">Genero</string>
+    <string name="nota">Nota</string>
 
     <string name="livrosLidos">Quantidade de livros lidos:</string>
     <string name="paginasLidas">Quantidade de páginas lidas:</string>

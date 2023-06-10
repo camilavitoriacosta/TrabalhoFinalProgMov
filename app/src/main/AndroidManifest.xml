@@ -12,13 +12,16 @@
         android:theme="@style/Theme.TrabalhoFinalProgMovel"
         tools:targetApi="31">
         <activity
-            android:name=".PerfilActivity"
+            android:name=".views.ListaActivity"
             android:exported="false" />
         <activity
-            android:name=".UsuarioCadastro"
+            android:name=".views.PerfilActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".views.UsuarioCadastro"
+            android:exported="false" />
+        <activity
+            android:name=".views.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

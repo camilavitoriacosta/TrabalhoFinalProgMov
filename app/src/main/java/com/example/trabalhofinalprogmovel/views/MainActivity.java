@@ -1,4 +1,4 @@
-package com.example.trabalhofinalprogmovel;
+package com.example.trabalhofinalprogmovel.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.trabalhofinalprogmovel.databinding.ActivityMainBinding;
-import com.example.trabalhofinalprogmovel.databinding.ActivityUsuarioCadastroBinding;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
