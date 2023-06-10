@@ -8,4 +8,13 @@
     <string name="campo_nome">Nome</string>
     <string name="campo_email">Email</string>
     <string name="campo_senha">Senha</string>
+
+    <string name="editar">Editar</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="leituras">Leituras</string>
+    <string name="listaDeDesejos">Lista de Desejos</string>
+
+    <string name="livrosLidos">Quantidade de livros lidos:</string>
+    <string name="paginasLidas">Quantidade de páginas lidas:</string>
+    <string name="generoLido">Gênero mais lido:</string>
 </resources>

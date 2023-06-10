@@ -1,5 +1,7 @@
 package com.example.trabalhofinalprogmovel;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -8,6 +10,7 @@ import com.example.trabalhofinalprogmovel.databinding.ActivityUsuarioCadastroBin
 public class UsuarioCadastro extends AppCompatActivity {
 
     private ActivityUsuarioCadastroBinding binding;
+    private Intent intent;
     private boolean ehTelaDeCadastro;
 
     @Override
@@ -17,6 +20,7 @@ public class UsuarioCadastro extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         ehTelaDeCadastro = getIntent().getBooleanExtra("cadastro", true);
+        intent = new Intent(this, PerfilActivity.class);
 
         if(ehTelaDeCadastro) {
             binding.retomarJornadaBtn.setVisibility(View.GONE);
@@ -26,5 +30,29 @@ public class UsuarioCadastro extends AppCompatActivity {
             binding.campoNome.setVisibility(View.GONE);
             binding.editNome.setVisibility(View.GONE);
         }
+
+        binding.iniciarJornadaBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // verificar campos vazios
+                // cadastrar usuario e obter usuario cadastrado
+                // mandar id para proxima tela
+                int idLeitor = 0;
+                intent.putExtra("id_leitor", idLeitor);
+                startActivity(intent);
+            }
+        });
+
+        binding.retomarJornadaBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // obter usuario por email
+                // verificar se senha que digitou está correta
+                // mandar id para proxima tela
+                int idLeitor = 0;
+                intent.putExtra("id_leitor", idLeitor);
+                startActivity(intent);
+            }
+        });
     }
 }

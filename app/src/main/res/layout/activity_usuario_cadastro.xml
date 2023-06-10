@@ -61,6 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="Digite seu nome"
             android:inputType="textPersonName" />
 
         <TextView
@@ -77,6 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="Digite seu email"
             android:inputType="textEmailAddress" />
 
         <TextView
@@ -93,6 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="Digite a senha"
             android:inputType="textPassword" />
 
         <Button
