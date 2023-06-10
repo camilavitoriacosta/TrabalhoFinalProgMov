@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">TrabalhoFinalProgMovel</string>
+    <string name="app_name">Reading Journal</string>
+    <string name="titulo">Reading Journal</string>
+    <string name="msg_bemvindo">Seja bem-vindo jovem leitor</string>
+    <string name="msg_iniciarjornada">Iniciar Jornada</string>
+    <string name="msg_retomarjornada">Retomar Jornada</string>
 </resources>
