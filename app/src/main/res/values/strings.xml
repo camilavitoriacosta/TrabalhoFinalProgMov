@@ -4,4 +4,8 @@
     <string name="msg_bemvindo">Seja bem-vindo jovem leitor</string>
     <string name="msg_iniciarjornada">Iniciar Jornada</string>
     <string name="msg_retomarjornada">Retomar Jornada</string>
+
+    <string name="campo_nome">Nome</string>
+    <string name="campo_email">Email</string>
+    <string name="campo_senha">Senha</string>
 </resources>
