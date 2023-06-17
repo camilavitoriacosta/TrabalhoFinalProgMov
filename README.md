@@ -6,7 +6,7 @@ O objetivo do aplicativo é permitir que seus usuários possam atribuir uma nota
 ### Funcionalidades
 A tela inicial conta com dois botões que dão a opção para o usuário se registrar no aplicativo ou entrar caso já possua uma conta.
 Após entrar no aplicativo com por meio do email e senha, o usuário será redirecionado para a página de perfil onde tem acesso a um dashboard que conta com as informações: quantidade de livros lidos, quantidade de páginas lidas e gênero mais lido. Por meio dessa página ele pode acessar sua lista de leituras ou sua lista de desejos.
-- Para se registrar é necessário inserir: nome, email, senha e uma foto.
+- Para se registrar é necessário inserir: nome, email e senha.
 - Por meio do menu o usuário pode acessar a página e perfil, lista de leitura e lista de desejos.
 
 #### Lista de Leitura:
@@ -17,7 +17,18 @@ Ao clicar em um dos itens da lista o usuário é redirecionado para uma tela ond
 Nessa tela o usuário tem acesso a sua lista de leituras desejadas, ele pode optar por filtrar a lista pelo gênero, além de poder adicionar um novo desejo.
 Ao clicar em um dos itens da lista o usuário é redirecionado para uma tela onde é possível fazer a edição das informações do desejo: livro, tendo a alternativa de excluir ou cancelar.
 
-### 👨‍💻 Time 👩‍💻
+## 🛠️ Recursos usados
+- Spinner;
+- ListView;
+- LinearLayout;
+- Cores;
+- Strings;
+- Toast;
+- Dialog;
+- Senha do usuário criptografada;
+- Banco de Dados: Room;
+
+## 👩🏻‍💻 Time
 <table>
   <tr>
     <td align="center">
