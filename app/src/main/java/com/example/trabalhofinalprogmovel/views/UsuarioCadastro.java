@@ -84,7 +84,6 @@ public class UsuarioCadastro extends AppCompatActivity {
                     String senha = criptografar(binding.editSenha.getText().toString());
                     Leitor leitor = db.leitorDao().getLeitorPorEmail(email);
                     idLeitor = leitor.getLeitorId();
-                    System.out.println(idLeitor);
 
                     if(senha.equals(leitor.getSenha())){
                         intent.putExtra("id_leitor", idLeitor);

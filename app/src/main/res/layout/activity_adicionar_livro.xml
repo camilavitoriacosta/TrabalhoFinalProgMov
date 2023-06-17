@@ -46,10 +46,10 @@
             android:id="@+id/tituloLivroAdicao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10sp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Digite o titulo"
-            android:layout_marginBottom="10sp"/>
+            android:hint="Digite o titulo"
+            android:inputType="textPersonName" />
 
         <TextView
             android:id="@+id/generoCampo"
@@ -64,10 +64,10 @@
             android:id="@+id/generoInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text"
             android:layout_marginBottom="10sp"
-            />
+            android:ems="10"
+            android:hint="Digite o genero"
+            android:inputType="text" />
 
         <TextView
             android:id="@+id/paginasCampo"
@@ -82,9 +82,10 @@
             android:id="@+id/paginasInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10sp"
             android:ems="10"
-            android:inputType="number"
-            android:layout_marginBottom="10sp"/>
+            android:hint="Digite a quantidade de paginas"
+            android:inputType="number" />
 
     </LinearLayout>
 

@@ -109,15 +109,15 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(intent);
-                //configurarSpinnerTituloLivro();
+                finish();
             }
         });
-
     }
 
     protected void preencherCamposLeitura(){
         // buscar leitura e preencher informações
     }
+
     protected void preencherCamposDesejo(){
         // buscar desejo e preencher informações
     }

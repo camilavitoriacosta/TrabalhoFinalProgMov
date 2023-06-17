@@ -15,8 +15,8 @@ public class Livro {
     }
 
     public Livro(String titulo, String genero, int quantidadeDePaginas) {
-        titulo = titulo;
-        genero = genero;
+        this.titulo = titulo;
+        this.genero = genero;
         this.quantidadeDePaginas = quantidadeDePaginas;
     }
 

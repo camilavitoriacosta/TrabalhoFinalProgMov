@@ -14,6 +14,8 @@ import com.example.trabalhofinalprogmovel.entities.Livro;
 public class AdicionarLivroActivity extends AppCompatActivity {
     private ActivityAdicionarLivroBinding binding;
     private LocalDatabase db;
+    private Livro livro;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,10 +32,10 @@ public class AdicionarLivroActivity extends AppCompatActivity {
                     String genero = binding.generoInput.getText().toString();
                     String paginas = binding.paginasInput.getText().toString();
 
-                    Livro livro = new Livro(titulo, genero, Integer.parseInt(paginas));
+                    livro = new Livro(titulo, genero, Integer.parseInt(paginas));
                     db.livroDao().insertAll(livro);
+                    finish();
                 }
-                finish();
             }
         });
 
