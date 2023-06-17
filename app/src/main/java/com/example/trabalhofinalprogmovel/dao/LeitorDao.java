@@ -14,7 +14,10 @@ import java.util.List;
 @Dao
 public interface LeitorDao {
     @Query("SELECT * FROM Leitor WHERE leitorId = :id LIMIT 1")
-    Livro getLeitor(int id);
+    Leitor getLeitor(int id);
+
+    @Query("SELECT * FROM Leitor WHERE email = :email LIMIT 1")
+    Leitor getLeitorPorEmail(String email);
 
     @Query("SELECT * FROM Leitor")
     List<Leitor> getAll();

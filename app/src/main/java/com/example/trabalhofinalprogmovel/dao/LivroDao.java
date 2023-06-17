@@ -20,7 +20,7 @@ public interface LivroDao {
     List<Livro> getAll();
 
     @Query("SELECT DISTINCT genero FROM Livro")
-    List<Livro> getLivroGenero();
+    List<String> getLivroGenero();
 
     @Insert
     void insertAll(Livro... livro);

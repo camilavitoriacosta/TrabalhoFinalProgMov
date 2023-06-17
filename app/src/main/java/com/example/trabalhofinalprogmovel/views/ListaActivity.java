@@ -26,9 +26,9 @@ public class ListaActivity extends AppCompatActivity {
     private boolean ehListaLeitura;
     private LocalDatabase db;
 
-    private List<Livro> generos;
+    private List<String> generos;
 
-    private List<Leitura> notas;
+    private List<Integer> notas;
     private List<Leitura> leiturasLeitor;
     private List<Desejo> desejosLeitor;
     private int idLeitor;
@@ -120,14 +120,14 @@ public class ListaActivity extends AppCompatActivity {
         Spinner spinnerGenero = binding.spinnerGenero;
 
         generos = db.livroDao().getLivroGenero();
-        ArrayAdapter<Livro>  generoAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, generos);
+        ArrayAdapter<String>  generoAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, generos);
         spinnerGenero.setAdapter(generoAdapter);
 
         spinnerGenero.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int posicao, long l) {
-                Livro generoSelecionado = generos.get(spinnerGenero.getSelectedItemPosition());
-                leiturasLeitor = db.leituraDao().getLeiturasPorLeitorEGenero(idLeitor, generoSelecionado.getGenero());
+                String generoSelecionado = generos.get(spinnerGenero.getSelectedItemPosition());
+                leiturasLeitor = db.leituraDao().getLeiturasPorLeitorEGenero(idLeitor, generoSelecionado);
 
                 ArrayAdapter<Leitura> adapter = new ArrayAdapter<>(ListaActivity.this, android.R.layout.simple_list_item_1, leiturasLeitor);
                 binding.listLivros.setAdapter(adapter);
@@ -144,14 +144,14 @@ public class ListaActivity extends AppCompatActivity {
         Spinner spinnerNota = binding.spinnerNota;
 
         notas = db.leituraDao().getLeiturasNota();
-        ArrayAdapter<Leitura>  notaAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notas);
+        ArrayAdapter<Integer>  notaAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notas);
         spinnerNota.setAdapter(notaAdapter);
 
         spinnerNota.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int posicao, long l) {
-                Leitura notaSelecionado = notas.get(spinnerNota.getSelectedItemPosition());
-                leiturasLeitor = db.leituraDao().getLeiturasPorLeitorENota(idLeitor, notaSelecionado.getNota());
+                Integer notaSelecionado = notas.get(spinnerNota.getSelectedItemPosition());
+                leiturasLeitor = db.leituraDao().getLeiturasPorLeitorENota(idLeitor, notaSelecionado);
 
                 ArrayAdapter<Leitura> adapter = new ArrayAdapter<>(ListaActivity.this, android.R.layout.simple_list_item_1, leiturasLeitor);
                 binding.listLivros.setAdapter(adapter);

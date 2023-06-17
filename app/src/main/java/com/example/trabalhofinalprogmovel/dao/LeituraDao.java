@@ -25,7 +25,7 @@ public interface LeituraDao {
     List<Leitura> getLeiturasPorLeitorENota(int idLeitor, int nota);
 
     @Query("SELECT DISTINCT nota FROM Leitura")
-    List<Leitura> getLeiturasNota();
+    List<Integer> getLeiturasNota();
 
     @Insert
     void insertAll(Leitura... leitura);
