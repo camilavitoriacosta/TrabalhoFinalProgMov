@@ -5,16 +5,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.example.trabalhofinalprogmovel.R;
+import com.example.trabalhofinalprogmovel.database.LocalDatabase;
 import com.example.trabalhofinalprogmovel.databinding.ActivityAdicionarLeituraBinding;
+import com.example.trabalhofinalprogmovel.entities.Leitura;
+import com.example.trabalhofinalprogmovel.entities.Livro;
+
+import java.util.List;
 
 public class AdicionarLeituraActivity extends AppCompatActivity {
     private ActivityAdicionarLeituraBinding binding;
     private Intent intent;
+    private LocalDatabase db;
     private boolean ehTelaDeCadastroLeitura;
     private int idLeitura;
     private int idDesejo;
+
+    private List<Livro> livros;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +33,14 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
         binding = ActivityAdicionarLeituraBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        db = LocalDatabase.getDatabase(getApplicationContext());
         intent = new Intent(this, AdicionarLivroActivity.class);
 
         ehTelaDeCadastroLeitura = getIntent().getBooleanExtra("adicionar_leitura", true);
         idLeitura = getIntent().getIntExtra("id_leitura", -1);
         idDesejo = getIntent().getIntExtra("id_desejo", -1);
+
+        configurarSpinnerTituloLivro();
 
         if(ehTelaDeCadastroLeitura){
             if(idLeitura >= 0){
@@ -95,6 +109,7 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(intent);
+                //configurarSpinnerTituloLivro();
             }
         });
 
@@ -105,5 +120,13 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
     }
     protected void preencherCamposDesejo(){
         // buscar desejo e preencher informações
+    }
+
+    private void configurarSpinnerTituloLivro() {
+        Spinner spinnerTituloLivro = binding.spinnerLivro;
+
+        livros = db.livroDao().getAll();
+        ArrayAdapter<Livro> livroAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, livros);
+        spinnerTituloLivro.setAdapter(livroAdapter);
     }
 }

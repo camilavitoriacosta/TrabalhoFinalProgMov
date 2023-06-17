@@ -10,13 +10,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.example.trabalhofinalprogmovel.R;
-import com.example.trabalhofinalprogmovel.dao.LeituraDao;
 import com.example.trabalhofinalprogmovel.database.LocalDatabase;
 import com.example.trabalhofinalprogmovel.databinding.ActivityListaBinding;
-import com.example.trabalhofinalprogmovel.databinding.ActivityPerfilBinding;
 import com.example.trabalhofinalprogmovel.entities.Desejo;
 import com.example.trabalhofinalprogmovel.entities.Leitura;
-import com.example.trabalhofinalprogmovel.entities.Livro;
 
 import java.util.List;
 
@@ -41,6 +38,7 @@ public class ListaActivity extends AppCompatActivity {
 
         intent = new Intent(this, AdicionarLeituraActivity.class);
         db = LocalDatabase.getDatabase(getApplicationContext());
+
         ehListaLeitura = getIntent().getBooleanExtra("listaLeituras", false);
         idLeitor = getIntent().getIntExtra("idLeitor", -1);
     }
@@ -53,7 +51,7 @@ public class ListaActivity extends AppCompatActivity {
     private void configurarElementos() {
         if(ehListaLeitura){
            configurarListaLeitura();
-            configurarSpinnerNota();
+           //configurarSpinnerNota();
         }
         else{
             configurarListaDesejos();

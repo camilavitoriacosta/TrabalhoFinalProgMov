@@ -19,7 +19,7 @@ public interface LivroDao {
     @Query("SELECT * FROM Livro")
     List<Livro> getAll();
 
-    @Query("SELECT DISTINCT genero FROM Livro")
+    @Query("SELECT DISTINCT genero FROM Livro WHERE genero IS NOT NULL")
     List<String> getLivroGenero();
 
     @Insert

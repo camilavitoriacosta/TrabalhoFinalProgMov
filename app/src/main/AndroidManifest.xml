@@ -12,10 +12,10 @@
         android:theme="@style/Theme.TrabalhoFinalProgMovel"
         tools:targetApi="31">
         <activity
-            android:name=".AdicionarLivroActivity"
+            android:name=".views.AdicionarLivroActivity"
             android:exported="false" />
         <activity
-            android:name=".AdicionarLeituraActivity"
+            android:name=".views.AdicionarLeituraActivity"
             android:exported="false" />
         <activity
             android:name=".views.ListaActivity"

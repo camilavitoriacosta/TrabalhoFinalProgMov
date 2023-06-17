@@ -36,6 +36,9 @@ public class UsuarioCadastro extends AppCompatActivity {
         if(ehTelaDeCadastro) {
             if(idLeitor >= 0){
                 carregarInformacoesLeitor();
+                binding.iniciarJornadaBtn.setVisibility(View.GONE);
+                binding.campoSenha.setVisibility(View.GONE);
+                binding.editSenha.setVisibility(View.GONE);
             }else{
                 binding.acoesEdicao.setVisibility(View.GONE);
             }
@@ -51,7 +54,7 @@ public class UsuarioCadastro extends AppCompatActivity {
         binding.iniciarJornadaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(verificarCamposCadastroOuEdicao()){
+                if(verificarCamposCadastro()){
                     String nome = binding.editNome.getText().toString();
                     String email = binding.editEmail.getText().toString();
                     String senha = criptografar(binding.editSenha.getText().toString());
@@ -63,7 +66,8 @@ public class UsuarioCadastro extends AppCompatActivity {
                     }
                     else {
                         db.leitorDao().insertAll(leitor);
-                        idLeitor = leitor.getLeitorId();
+                        Leitor leitorCadastrado = db.leitorDao().getLeitorPorEmail(email);
+                        idLeitor = leitorCadastrado.getLeitorId();
                     }
 
                     intent.putExtra("id_leitor", idLeitor);
@@ -79,6 +83,8 @@ public class UsuarioCadastro extends AppCompatActivity {
                     String email = binding.editEmail.getText().toString();
                     String senha = criptografar(binding.editSenha.getText().toString());
                     Leitor leitor = db.leitorDao().getLeitorPorEmail(email);
+                    idLeitor = leitor.getLeitorId();
+                    System.out.println(idLeitor);
 
                     if(senha.equals(leitor.getSenha())){
                         intent.putExtra("id_leitor", idLeitor);
@@ -98,13 +104,29 @@ public class UsuarioCadastro extends AppCompatActivity {
                 }
             }
         });
+
+        binding.editarLeitor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(verificarCamposEdicao()) {
+                    String nome = binding.editNome.getText().toString();
+                    String email = binding.editEmail.getText().toString();
+                    Leitor leitor = db.leitorDao().getLeitor(idLeitor);
+                    leitor.setEmail(email);
+                    leitor.setNome(nome);
+                    db.leitorDao().update(leitor);
+
+                    intent.putExtra("id_leitor", idLeitor);
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
     protected void carregarInformacoesLeitor(){
         Leitor leitor = db.leitorDao().getLeitor(idLeitor);
         binding.editNome.setText(leitor.getNome());
         binding.editEmail.setText(leitor.getEmail());
-        binding.editSenha.setText(leitor.getSenha());
     }
 
     private String criptografar(String senha){
@@ -128,12 +150,19 @@ public class UsuarioCadastro extends AppCompatActivity {
         return valorCampo.equals("");
     }
 
-    private boolean verificarCamposCadastroOuEdicao(){
+    private boolean verificarCamposCadastro(){
         String nome = binding.editNome.getText().toString();
         String email = binding.editEmail.getText().toString();
         String senha = binding.editSenha.getText().toString();
         return !validarCampo("nome", nome) && !validarCampo("email", email) && !validarCampo("senha", senha);
     }
+
+    private boolean verificarCamposEdicao(){
+        String nome = binding.editNome.getText().toString();
+        String email = binding.editEmail.getText().toString();
+        return !validarCampo("nome", nome) && !validarCampo("email", email);
+    }
+
     private boolean verificarCamposLogin(){
         String email = binding.editEmail.getText().toString();
         String senha = binding.editSenha.getText().toString();
