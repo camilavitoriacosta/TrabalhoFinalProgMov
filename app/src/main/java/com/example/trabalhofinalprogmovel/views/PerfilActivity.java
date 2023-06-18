@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.trabalhofinalprogmovel.R;
@@ -19,6 +21,39 @@ public class PerfilActivity extends AppCompatActivity {
     private Intent intentListaDesejo;
     private Intent intentEdicao;
     private int idLeitor;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        Intent intent;
+
+        if (id == R.id.listaDesejo) {
+            intent = new Intent(this, ListaDesejoActivity.class);
+            intent.putExtra("id_leitor", idLeitor);
+        }
+        else if (id == R.id.listaLeitura) {
+            intent = new Intent(this, ListaActivity.class);
+            intent.putExtra("id_leitor", idLeitor);
+        }
+        else if(id == R.id.perfil ) {
+            intent = new Intent(this, PerfilActivity.class);
+            intent.putExtra("id_leitor", idLeitor);
+        }
+        else {
+            intent = new Intent(this, MainActivity.class);
+            intent.putExtra("id_leitor", -1);
+        }
+
+        startActivity(intent);
+        finish();
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

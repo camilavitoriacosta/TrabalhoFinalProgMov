@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,10 +14,8 @@ import android.widget.Spinner;
 
 import com.example.trabalhofinalprogmovel.R;
 import com.example.trabalhofinalprogmovel.database.LocalDatabase;
-import com.example.trabalhofinalprogmovel.databinding.ActivityListaBinding;
 import com.example.trabalhofinalprogmovel.databinding.ActivityListaDesejoBinding;
 import com.example.trabalhofinalprogmovel.entities.Desejo;
-import com.example.trabalhofinalprogmovel.entities.Leitura;
 
 import java.util.List;
 
@@ -27,6 +27,39 @@ public class ListaDesejoActivity extends AppCompatActivity {
     private List<Desejo> desejosLeitor;
     private int idLeitor;
     private ListView lista;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        Intent intent;
+
+        if (id == R.id.listaDesejo) {
+            intent = new Intent(this, ListaDesejoActivity.class);
+            intent.putExtra("id_leitor", idLeitor);
+        }
+        else if (id == R.id.listaLeitura) {
+            intent = new Intent(this, ListaActivity.class);
+            intent.putExtra("id_leitor", idLeitor);
+        }
+        else if(id == R.id.perfil ) {
+            intent = new Intent(this, PerfilActivity.class);
+            intent.putExtra("id_leitor", idLeitor);
+        }
+        else {
+            intent = new Intent(this, MainActivity.class);
+            intent.putExtra("id_leitor", -1);
+        }
+
+        startActivity(intent);
+        finish();
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

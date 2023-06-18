@@ -1,0 +1,27 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item
+        android:id="@+id/listaLeitura"
+        android:title="Lista de Leituras"
+        />
+
+    <item
+        android:id="@+id/listaDesejo"
+        android:title="Lista de Desejos"
+        />
+
+    <item
+        android:id="@+id/perfil"
+        android:title="Perfil"
+        />
+
+
+    <item
+        android:id="@+id/op_sair"
+        android:title="Sair"
+        android:icon="@drawable/baseline_logout_24"
+        app:showAsAction="always"
+        />
+
+</menu>

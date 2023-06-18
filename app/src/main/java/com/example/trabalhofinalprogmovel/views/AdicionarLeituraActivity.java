@@ -6,6 +6,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -35,6 +37,39 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
     private Desejo desejo;
 
     final AppCompatActivity activity = this;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        Intent intent;
+
+        if (id == R.id.listaDesejo) {
+            intent = new Intent(this, ListaDesejoActivity.class);
+            intent.putExtra("id_leitor", idLeitor);
+        }
+        else if (id == R.id.listaLeitura) {
+            intent = new Intent(this, ListaActivity.class);
+            intent.putExtra("id_leitor", idLeitor);
+        }
+        else if(id == R.id.perfil ) {
+            intent = new Intent(this, PerfilActivity.class);
+            intent.putExtra("id_leitor", idLeitor);
+        }
+        else {
+            intent = new Intent(this, MainActivity.class);
+            intent.putExtra("id_leitor", -1);
+        }
+
+        startActivity(intent);
+        finish();
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,6 +187,7 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
         binding.adicionarLivro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                intent.putExtra("id_leitor", idLeitor);
                 startActivity(intent);
                 finish();
             }
