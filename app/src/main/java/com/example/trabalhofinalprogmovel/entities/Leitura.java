@@ -1,8 +1,11 @@
 package com.example.trabalhofinalprogmovel.entities;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
+
+import com.example.trabalhofinalprogmovel.database.LocalDatabase;
 
 @Entity(foreignKeys = {@ForeignKey(entity = Leitor.class, parentColumns = "leitorId",
         childColumns = "leitorId", onDelete = ForeignKey.CASCADE), @ForeignKey(entity = Livro.class, parentColumns = "livroId",
@@ -14,13 +17,15 @@ public class Leitura {
     private int livroId;
     private String comentario;
     private int nota;
+    private String titulo;
 
     public Leitura() {
     }
 
-    public Leitura(int leitorId, int livroId, String comentario, int nota) {
+    public Leitura(int leitorId, int livroId, String titulo, String comentario, int nota) {
         this.leitorId = leitorId;
         this.livroId = livroId;
+        this.titulo = titulo;
         this.comentario = comentario;
         this.nota = nota;
     }
@@ -63,5 +68,18 @@ public class Leitura {
 
     public void setNota(int nota) {
         this.nota = nota;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    @Override
+    public String toString() {
+        return getTitulo() + " - Nota: " + getNota();
     }
 }

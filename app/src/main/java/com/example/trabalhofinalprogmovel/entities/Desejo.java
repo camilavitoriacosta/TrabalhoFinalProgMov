@@ -1,5 +1,6 @@
 package com.example.trabalhofinalprogmovel.entities;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
@@ -13,12 +14,15 @@ public class Desejo {
     private int leitorId;
     private int livroId;
 
+    private String titulo;
+
     public Desejo() {
     }
 
-    public Desejo(int leitorId, int livroId) {
+    public Desejo(int leitorId, int livroId, String titulo) {
         this.leitorId = leitorId;
         this.livroId = livroId;
+        this.titulo = titulo;
     }
 
     public int getDesejoId() {
@@ -43,5 +47,18 @@ public class Desejo {
 
     public void setLivroId(int livroId) {
         this.livroId = livroId;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    @Override
+    public String toString() {
+        return getTitulo();
     }
 }

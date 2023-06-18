@@ -5,9 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.trabalhofinalprogmovel.R;
 import com.example.trabalhofinalprogmovel.database.LocalDatabase;
@@ -24,8 +24,10 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
     private boolean ehTelaDeCadastroLeitura;
     private int idLeitura;
     private int idDesejo;
+    private int idLeitor;
 
     private List<Livro> livros;
+    private Leitura leitura;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
         ehTelaDeCadastroLeitura = getIntent().getBooleanExtra("adicionar_leitura", true);
         idLeitura = getIntent().getIntExtra("id_leitura", -1);
         idDesejo = getIntent().getIntExtra("id_desejo", -1);
+        idLeitor = getIntent().getIntExtra("id_leitor", -1);
 
         configurarSpinnerTituloLivro();
 
@@ -51,11 +54,20 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
             binding.cadastroBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(idLeitura >= 0){
-                        // atualizar leitura
-                    }
-                    else{
-                        // adicionar leitura
+                    if(verificarCamposCadastroOuEdicaoLeitura()){
+                        int index = binding.spinnerLivro.getSelectedItemPosition();
+                        Livro livro = livros.get(index);
+                        String comentario = binding.comentarioInput.getText().toString();
+                        int nota = Integer.parseInt(binding.notaInput.getText().toString());
+
+                        if(idLeitura >= 0){
+                            // atualizar leitura
+                        }
+                        else{
+                            leitura = new Leitura(idLeitor, livro.getLivroId(), livro.getTitulo(), comentario, nota);
+                            db.leituraDao().insertAll(leitura);
+                            finish();
+                        }
                     }
                 }
             });
@@ -128,5 +140,19 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
         livros = db.livroDao().getAll();
         ArrayAdapter<Livro> livroAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, livros);
         spinnerTituloLivro.setAdapter(livroAdapter);
+    }
+
+    private boolean validarCampo(String campo, String valorCampo){
+        if(valorCampo.equals("")){
+            Toast.makeText(this, "O campo de " + campo +" é obrigatório", Toast.LENGTH_SHORT).show();
+        }
+        return valorCampo.equals("");
+    }
+
+    private boolean verificarCamposCadastroOuEdicaoLeitura(){
+        String livro = binding.spinnerLivro.getSelectedItem().toString();
+        String comentario = binding.comentarioInput.getText().toString();
+        String nota = binding.notaInput.getText().toString();
+        return !validarCampo("Livro", livro) && !validarCampo("comentario", comentario) && !validarCampo("nota", nota);
     }
 }

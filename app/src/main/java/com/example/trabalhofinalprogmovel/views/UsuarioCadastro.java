@@ -40,12 +40,12 @@ public class UsuarioCadastro extends AppCompatActivity {
                 binding.campoSenha.setVisibility(View.GONE);
                 binding.editSenha.setVisibility(View.GONE);
             }else{
-                binding.acoesEdicao.setVisibility(View.GONE);
+                binding.editarLeitor.setVisibility(View.GONE);
             }
             binding.retomarJornadaBtn.setVisibility(View.GONE);
         }
         else{
-            binding.acoesEdicao.setVisibility(View.GONE);
+            binding.editarLeitor.setVisibility(View.GONE);
             binding.iniciarJornadaBtn.setVisibility(View.GONE);
             binding.campoNome.setVisibility(View.GONE);
             binding.editNome.setVisibility(View.GONE);
@@ -83,16 +83,30 @@ public class UsuarioCadastro extends AppCompatActivity {
                     String email = binding.editEmail.getText().toString();
                     String senha = criptografar(binding.editSenha.getText().toString());
                     Leitor leitor = db.leitorDao().getLeitorPorEmail(email);
-                    idLeitor = leitor.getLeitorId();
 
-                    if(senha.equals(leitor.getSenha())){
-                        intent.putExtra("id_leitor", idLeitor);
-                        startActivity(intent);
+                    if (leitor != null) {
+                        idLeitor = leitor.getLeitorId();
+
+                        if(senha.equals(leitor.getSenha())){
+                            intent.putExtra("id_leitor", idLeitor);
+                            startActivity(intent);
+                        }
+                        else{
+                            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                            builder.setMessage("Senha invalida")
+                                    .setTitle("Senha invalida")
+                                    .setPositiveButton("Ok",  (DialogInterface.OnClickListener) (dialog, which) -> {
+                                        dialog.cancel();
+                                    });
+
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
                     }
                     else{
                         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                        builder.setMessage("Senha invalida")
-                                .setTitle("Senha invalida")
+                        builder.setMessage("Usuario não encontrado")
+                                .setTitle("Usuario não encontrado")
                                 .setPositiveButton("Ok",  (DialogInterface.OnClickListener) (dialog, which) -> {
                                     dialog.cancel();
                                 });
@@ -118,6 +132,13 @@ public class UsuarioCadastro extends AppCompatActivity {
                     intent.putExtra("id_leitor", idLeitor);
                     startActivity(intent);
                 }
+            }
+        });
+
+        binding.cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

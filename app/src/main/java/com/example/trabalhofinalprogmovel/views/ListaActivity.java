@@ -40,7 +40,7 @@ public class ListaActivity extends AppCompatActivity {
         db = LocalDatabase.getDatabase(getApplicationContext());
 
         ehListaLeitura = getIntent().getBooleanExtra("listaLeituras", false);
-        idLeitor = getIntent().getIntExtra("idLeitor", -1);
+        idLeitor = getIntent().getIntExtra("id_leitor", -1);
     }
     @Override
     protected void onResume() {
@@ -51,7 +51,7 @@ public class ListaActivity extends AppCompatActivity {
     private void configurarElementos() {
         if(ehListaLeitura){
            configurarListaLeitura();
-           //configurarSpinnerNota();
+           configurarSpinnerNota();
         }
         else{
             configurarListaDesejos();
@@ -66,6 +66,7 @@ public class ListaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 intent.putExtra("adicionar_leitura", true);
+                intent.putExtra("id_leitor", idLeitor);
                 startActivity(intent);
             }
         });
@@ -94,6 +95,7 @@ public class ListaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 intent.putExtra("adicionar_leitura", false);
+                intent.putExtra("id_leitor", idLeitor);
                 startActivity(intent);
             }
         });

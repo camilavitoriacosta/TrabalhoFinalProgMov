@@ -15,7 +15,7 @@ import com.example.trabalhofinalprogmovel.entities.Leitor;
 import com.example.trabalhofinalprogmovel.entities.Leitura;
 import com.example.trabalhofinalprogmovel.entities.Livro;
 
-@Database(entities = {Livro.class, Leitor.class, Leitura.class, Desejo.class}, version = 2)
+@Database(entities = {Livro.class, Leitor.class, Leitura.class, Desejo.class}, version = 3)
 public abstract class LocalDatabase extends RoomDatabase {
     private static LocalDatabase INSTANCE;
 

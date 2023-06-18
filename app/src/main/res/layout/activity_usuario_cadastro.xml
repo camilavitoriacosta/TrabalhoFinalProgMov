@@ -114,32 +114,26 @@
             android:text="@string/msg_retomarjornada"
             android:textColor="@color/roxo_claro" />
 
-        <LinearLayout
-            android:id="@+id/acoesEdicao"
+        <Button
+            android:id="@+id/editarLeitor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:backgroundTint="@color/roxo_escuro"
+            android:text="@string/editar"
+            android:textColor="@color/roxo_claro" />
 
-            <Button
-                android:id="@+id/cancelar"
-                android:layout_width="185dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5sp"
-                android:layout_weight="1"
-                android:backgroundTint="@color/white"
-                android:text="@string/cancelar"
-                android:textColor="@color/roxo_escuro"
-                app:strokeColor="@color/roxo_escuro"
-                app:strokeWidth="1sp" />
+        <Button
+            android:id="@+id/cancelar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="5sp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:text="@string/cancelar"
+            android:textColor="@color/roxo_escuro"
+            app:strokeColor="@color/roxo_escuro"
+            app:strokeWidth="1sp" />
 
-            <Button
-                android:id="@+id/editarLeitor"
-                android:layout_width="185dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/roxo_escuro"
-                android:text="@string/editar"
-                android:textColor="@color/roxo_claro" />
-        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
