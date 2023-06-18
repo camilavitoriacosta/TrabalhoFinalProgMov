@@ -7,7 +7,7 @@ O objetivo do aplicativo é permitir que seus usuários possam atribuir uma nota
 A tela inicial conta com dois botões que dão a opção para o usuário se registrar no aplicativo ou entrar caso já possua uma conta.
 Após entrar no aplicativo com por meio do email e senha, o usuário será redirecionado para a página de perfil onde tem acesso a um dashboard que conta com as informações: quantidade de livros lidos, quantidade de páginas lidas e gênero mais lido. Por meio dessa página ele pode acessar sua lista de leituras ou sua lista de desejos.
 - Para se registrar é necessário inserir: nome, email e senha.
-- Por meio do menu o usuário pode acessar a página e perfil, lista de leitura e lista de desejos.
+- Por meio do menu o usuário pode acessar a página e perfil, lista de leitura e lista de desejos ou sair de sua conta.
 
 #### Lista de Leitura:
 Nessa tela o usuário tem acesso a sua lista de livros lidos, vendo informações como o título e gênero do livro e a nota associada, ele pode optar por filtrar a lista tanto pela nota quanto pelo gênero, além de poder adicionar uma nova leitura.
@@ -25,6 +25,7 @@ Ao clicar em um dos itens da lista o usuário é redirecionado para uma tela ond
 - Strings;
 - Toast;
 - Dialog;
+- Menu;
 - Senha do usuário criptografada;
 - Banco de Dados: Room;
 
