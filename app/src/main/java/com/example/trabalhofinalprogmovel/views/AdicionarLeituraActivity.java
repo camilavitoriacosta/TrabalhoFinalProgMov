@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.trabalhofinalprogmovel.R;
 import com.example.trabalhofinalprogmovel.database.LocalDatabase;
 import com.example.trabalhofinalprogmovel.databinding.ActivityAdicionarLeituraBinding;
+import com.example.trabalhofinalprogmovel.entities.Desejo;
 import com.example.trabalhofinalprogmovel.entities.Leitura;
 import com.example.trabalhofinalprogmovel.entities.Livro;
 
@@ -28,6 +29,7 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
 
     private List<Livro> livros;
     private Leitura leitura;
+    private Desejo desejo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,12 +94,20 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
 
             binding.cadastroBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
+
                 public void onClick(View v) {
-                    if(idDesejo >= 0){
-                        //atualizar Desejo
-                    }
-                    else{
-                        // adicionar desejo
+                    int index = binding.spinnerLivro.getSelectedItemPosition();
+                    Livro livro = livros.get(index);
+
+                    if(verificarCamposCadastroOuEdicaoDesejo()){
+                        if(idDesejo >= 0){
+                            //atualizar Desejo
+                        }
+                        else{
+                            desejo = new Desejo(idLeitor, livro.getLivroId(), livro.getTitulo());
+                            db.desejoDao().insertAll(desejo);
+                            finish();
+                        }
                     }
                 }
             });
@@ -154,5 +164,10 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
         String comentario = binding.comentarioInput.getText().toString();
         String nota = binding.notaInput.getText().toString();
         return !validarCampo("Livro", livro) && !validarCampo("comentario", comentario) && !validarCampo("nota", nota);
+    }
+
+    private boolean verificarCamposCadastroOuEdicaoDesejo(){
+        String livro = binding.spinnerLivro.getSelectedItem().toString();
+        return !validarCampo("Livro", livro);
     }
 }

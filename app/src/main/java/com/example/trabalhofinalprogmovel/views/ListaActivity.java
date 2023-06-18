@@ -127,10 +127,17 @@ public class ListaActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int posicao, long l) {
                 String generoSelecionado = generos.get(spinnerGenero.getSelectedItemPosition());
-                leiturasLeitor = db.leituraDao().getLeiturasPorLeitorEGenero(idLeitor, generoSelecionado);
+                if(ehListaLeitura){
+                    leiturasLeitor = db.leituraDao().getLeiturasPorLeitorEGenero(idLeitor, generoSelecionado);
 
-                ArrayAdapter<Leitura> adapter = new ArrayAdapter<>(ListaActivity.this, android.R.layout.simple_list_item_1, leiturasLeitor);
-                binding.listLivros.setAdapter(adapter);
+                    ArrayAdapter<Leitura> adapter = new ArrayAdapter<>(ListaActivity.this, android.R.layout.simple_list_item_1, leiturasLeitor);
+                    binding.listLivros.setAdapter(adapter);
+                }
+                else{
+                    desejosLeitor = db.desejoDao().getDesejosPorLeitorPorGenero(idLeitor, generoSelecionado);
+                    ArrayAdapter<Desejo> adapter = new ArrayAdapter<>(ListaActivity.this, android.R.layout.simple_list_item_1, desejosLeitor);
+                    binding.listLivros.setAdapter(adapter);
+                }
             }
 
             @Override
@@ -152,7 +159,6 @@ public class ListaActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int posicao, long l) {
                 Integer notaSelecionado = notas.get(spinnerNota.getSelectedItemPosition());
                 leiturasLeitor = db.leituraDao().getLeiturasPorLeitorENota(idLeitor, notaSelecionado);
-
                 ArrayAdapter<Leitura> adapter = new ArrayAdapter<>(ListaActivity.this, android.R.layout.simple_list_item_1, leiturasLeitor);
                 binding.listLivros.setAdapter(adapter);
             }

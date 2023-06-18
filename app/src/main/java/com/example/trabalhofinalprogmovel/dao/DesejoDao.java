@@ -19,6 +19,9 @@ public interface DesejoDao {
     @Query("SELECT * FROM Desejo WHERE leitorId = :idLeitor")
     List<Desejo> getDesejosPorLeitor(int idLeitor);
 
+    @Query("SELECT * FROM Desejo  INNER JOIN  Livro ON Desejo.livroId = Livro.livroId WHERE leitorId = :idLeitor AND Livro.genero = :genero")
+    List<Desejo> getDesejosPorLeitorPorGenero(int idLeitor, String genero);
+
     @Insert
     void insertAll(Desejo... desejo);
 
