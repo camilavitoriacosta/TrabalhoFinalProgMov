@@ -13,25 +13,25 @@ import android.widget.Spinner;
 import com.example.trabalhofinalprogmovel.R;
 import com.example.trabalhofinalprogmovel.database.LocalDatabase;
 import com.example.trabalhofinalprogmovel.databinding.ActivityListaBinding;
+import com.example.trabalhofinalprogmovel.databinding.ActivityListaDesejoBinding;
 import com.example.trabalhofinalprogmovel.entities.Desejo;
 import com.example.trabalhofinalprogmovel.entities.Leitura;
 
 import java.util.List;
 
-public class ListaActivity extends AppCompatActivity {
-    private ActivityListaBinding binding;
+public class ListaDesejoActivity extends AppCompatActivity {
+    private ActivityListaDesejoBinding binding;
     private Intent intent;
     private LocalDatabase db;
     private List<String> generos;
-    private List<Integer> notas;
-    private List<Leitura> leiturasLeitor;
+    private List<Desejo> desejosLeitor;
     private int idLeitor;
     private ListView lista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityListaBinding.inflate(getLayoutInflater());
+        binding = ActivityListaDesejoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         intent = new Intent(this, AdicionarLeituraActivity.class);
@@ -46,33 +46,32 @@ public class ListaActivity extends AppCompatActivity {
     }
 
     private void configurarElementos() {
-        configurarListaLeitura();
-        configurarSpinnerNota();
+        configurarListaDesejos();
         configurarSpinnerGenero();
     }
 
-    private void configurarListaLeitura(){
+    private void configurarListaDesejos(){
         binding.adicionarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent.putExtra("adicionar_leitura", true);
+                intent.putExtra("adicionar_leitura", false);
                 intent.putExtra("id_leitor", idLeitor);
                 startActivity(intent);
             }
         });
 
-        leiturasLeitor = db.leituraDao().getLeiturasPorLeitor(idLeitor);
-        System.out.println(leiturasLeitor);
-        ArrayAdapter<Leitura> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, leiturasLeitor);
+        desejosLeitor = db.desejoDao().getDesejosPorLeitor(idLeitor);
+        ArrayAdapter<Desejo> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, desejosLeitor);
         lista.setAdapter(adapter);
+        System.out.println(desejosLeitor);
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> adapter, View view,
                                     int position, long id){
-                Leitura leituraSelecionado = leiturasLeitor.get(position);
-                intent.putExtra("id_leitura",
-                        leituraSelecionado.getLeituraId());
+                Desejo desejoSelecionado = desejosLeitor.get(position);
+                intent.putExtra("id_desejo",
+                        desejoSelecionado.getDesejoId());
                 startActivity(intent);
             }
         });
@@ -89,31 +88,8 @@ public class ListaActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int posicao, long l) {
                 String generoSelecionado = generos.get(spinnerGenero.getSelectedItemPosition());
-                leiturasLeitor = db.leituraDao().getLeiturasPorLeitorEGenero(idLeitor, generoSelecionado);
-                ArrayAdapter<Leitura> adapter = new ArrayAdapter<>(ListaActivity.this, android.R.layout.simple_list_item_1, leiturasLeitor);
-                lista.setAdapter(adapter);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-    }
-
-    private void configurarSpinnerNota(){
-        Spinner spinnerNota = binding.spinnerNota;
-
-        notas = db.leituraDao().getLeiturasNota();
-        ArrayAdapter<Integer>  notaAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notas);
-        spinnerNota.setAdapter(notaAdapter);
-
-        spinnerNota.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int posicao, long l) {
-                Integer notaSelecionado = notas.get(spinnerNota.getSelectedItemPosition());
-                leiturasLeitor = db.leituraDao().getLeiturasPorLeitorENota(idLeitor, notaSelecionado);
-                ArrayAdapter<Leitura> adapter = new ArrayAdapter<>(ListaActivity.this, android.R.layout.simple_list_item_1, leiturasLeitor);
+                desejosLeitor = db.desejoDao().getDesejosPorLeitorPorGenero(idLeitor, generoSelecionado);
+                ArrayAdapter<Desejo> adapter = new ArrayAdapter<>(ListaDesejoActivity.this, android.R.layout.simple_list_item_1, desejosLeitor);
                 lista.setAdapter(adapter);
             }
 

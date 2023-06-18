@@ -15,7 +15,8 @@ public class PerfilActivity extends AppCompatActivity {
 
     private ActivityPerfilBinding binding;
     private LocalDatabase db;
-    private Intent intentLista;
+    private Intent intentListaLeitura;
+    private Intent intentListaDesejo;
     private Intent intentEdicao;
     private int idLeitor;
 
@@ -27,7 +28,8 @@ public class PerfilActivity extends AppCompatActivity {
 
         db = LocalDatabase.getDatabase(getApplicationContext());
 
-        intentLista = new Intent(this, ListaActivity.class);
+        intentListaLeitura = new Intent(this, ListaActivity.class);
+        intentListaDesejo = new Intent(this, ListaDesejoActivity.class);
         intentEdicao = new Intent(this, UsuarioCadastro.class);
 
         idLeitor = getIntent().getIntExtra("id_leitor", -1);
@@ -37,9 +39,8 @@ public class PerfilActivity extends AppCompatActivity {
         binding.listaDesejosBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intentLista.putExtra("listaLeituras", false);
-                intentLista.putExtra("id_leitor", idLeitor);
-                startActivity(intentLista);
+                intentListaDesejo.putExtra("id_leitor", idLeitor);
+                startActivity(intentListaDesejo);
                 finish();
             }
         });
@@ -47,9 +48,8 @@ public class PerfilActivity extends AppCompatActivity {
         binding.LeiturasBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intentLista.putExtra("listaLeituras", true);
-                intentLista.putExtra("id_leitor", idLeitor);
-                startActivity(intentLista);
+                intentListaLeitura.putExtra("id_leitor", idLeitor);
+                startActivity(intentListaLeitura);
                 finish();
             }
         });

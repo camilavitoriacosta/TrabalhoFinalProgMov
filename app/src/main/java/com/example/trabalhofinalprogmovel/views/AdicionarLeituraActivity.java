@@ -2,6 +2,8 @@ package com.example.trabalhofinalprogmovel.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +15,7 @@ import com.example.trabalhofinalprogmovel.R;
 import com.example.trabalhofinalprogmovel.database.LocalDatabase;
 import com.example.trabalhofinalprogmovel.databinding.ActivityAdicionarLeituraBinding;
 import com.example.trabalhofinalprogmovel.entities.Desejo;
+import com.example.trabalhofinalprogmovel.entities.Leitor;
 import com.example.trabalhofinalprogmovel.entities.Leitura;
 import com.example.trabalhofinalprogmovel.entities.Livro;
 
@@ -30,6 +33,8 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
     private List<Livro> livros;
     private Leitura leitura;
     private Desejo desejo;
+
+    final AppCompatActivity activity = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,13 +68,18 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
                         int nota = Integer.parseInt(binding.notaInput.getText().toString());
 
                         if(idLeitura >= 0){
-                            // atualizar leitura
+                            Leitura leitura = db.leituraDao().getLeituraPorId(idLeitura);
+                            leitura.setComentario(comentario);
+                            leitura.setNota(nota);
+                            leitura.setTitulo(livro.getTitulo());
+                            leitura.setLivroId(livro.getLivroId());
+                            db.leituraDao().update(leitura);
                         }
                         else{
                             leitura = new Leitura(idLeitor, livro.getLivroId(), livro.getTitulo(), comentario, nota);
                             db.leituraDao().insertAll(leitura);
-                            finish();
                         }
+                        finish();
                     }
                 }
             });
@@ -77,7 +87,19 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
             binding.excluirbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // excluir leitura
+                    new AlertDialog.Builder(activity)
+                            .setTitle("Exclusão de Leitura")
+                            .setMessage("Deseja excluir essa leitura?")
+                            .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    db.leituraDao().delete(db.leituraDao().getLeituraPorId(idLeitura));
+                                    Toast.makeText(activity, "Leitura excluída com sucesso.", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                            })
+                            .setNegativeButton("Não", null)
+                            .show();
                 }
             });
         }
@@ -137,7 +159,14 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
     }
 
     protected void preencherCamposLeitura(){
-        // buscar leitura e preencher informações
+        System.out.println(idLeitura);
+        if(idLeitura >= 0){
+            Leitura leitura = db.leituraDao().getLeituraPorId(idLeitura);
+            System.out.println(leitura);
+            binding.spinnerLivro.setSelection(leitura.getLeituraId() - 1);
+            binding.comentarioInput.setText(leitura.getComentario());
+            binding.notaInput.setText(Integer.toString(leitura.getNota()));
+        }
     }
 
     protected void preencherCamposDesejo(){
