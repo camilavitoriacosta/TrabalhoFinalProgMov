@@ -91,6 +91,27 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
             if(idLeitura >= 0){
                 preencherCamposLeitura();
                 binding.cadastroBtn.setText(getString(R.string.editar));
+                binding.excluirbtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        new AlertDialog.Builder(activity)
+                                .setTitle("Exclusão de Leitura")
+                                .setMessage("Deseja excluir essa leitura?")
+                                .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        db.leituraDao().delete(db.leituraDao().getLeituraPorId(idLeitura));
+                                        Toast.makeText(activity, "Leitura excluída com sucesso.", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }
+                                })
+                                .setNegativeButton("Não", null)
+                                .show();
+                    }
+                });
+            }
+            else{
+                binding.excluirbtn.setVisibility(View.GONE);
             }
 
             binding.cadastroBtn.setOnClickListener(new View.OnClickListener() {
@@ -118,25 +139,6 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
                     }
                 }
             });
-
-            binding.excluirbtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    new AlertDialog.Builder(activity)
-                            .setTitle("Exclusão de Leitura")
-                            .setMessage("Deseja excluir essa leitura?")
-                            .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    db.leituraDao().delete(db.leituraDao().getLeituraPorId(idLeitura));
-                                    Toast.makeText(activity, "Leitura excluída com sucesso.", Toast.LENGTH_SHORT).show();
-                                    finish();
-                                }
-                            })
-                            .setNegativeButton("Não", null)
-                            .show();
-                }
-            });
         }
         else{
             binding.campoComentario.setVisibility(View.GONE);
@@ -147,6 +149,27 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
             if(idDesejo >= 0){
                 preencherCamposDesejo();
                 binding.cadastroBtn.setText(getString(R.string.editar));
+                binding.excluirbtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        new AlertDialog.Builder(activity)
+                                .setTitle("Exclusão de Desejo")
+                                .setMessage("Deseja excluir esse desejo?")
+                                .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        db.desejoDao().delete(db.desejoDao().getDesejoPorId(idDesejo));
+                                        Toast.makeText(activity, "Desejo excluído com sucesso.", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }
+                                })
+                                .setNegativeButton("Não", null)
+                                .show();
+                    }
+                });
+            }
+            else{
+                binding.excluirbtn.setVisibility(View.GONE);
             }
 
             binding.cadastroBtn.setOnClickListener(new View.OnClickListener() {
@@ -158,7 +181,11 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
 
                     if(verificarCamposCadastroOuEdicaoDesejo()){
                         if(idDesejo >= 0){
-                            //atualizar Desejo
+                            Desejo desejo = db.desejoDao().getDesejoPorId(idDesejo);
+                            desejo.setLivroId(livro.getLivroId());
+                            desejo.setTitulo(livro.getTitulo());
+                            db.desejoDao().update(desejo);
+                            finish();
                         }
                         else{
                             desejo = new Desejo(idLeitor, livro.getLivroId(), livro.getTitulo());
@@ -166,13 +193,6 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
                             finish();
                         }
                     }
-                }
-            });
-
-            binding.excluirbtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // excluir desejo
                 }
             });
         }
@@ -195,10 +215,8 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
     }
 
     protected void preencherCamposLeitura(){
-        System.out.println(idLeitura);
         if(idLeitura >= 0){
             Leitura leitura = db.leituraDao().getLeituraPorId(idLeitura);
-            System.out.println(leitura);
             binding.spinnerLivro.setSelection(leitura.getLeituraId() - 1);
             binding.comentarioInput.setText(leitura.getComentario());
             binding.notaInput.setText(Integer.toString(leitura.getNota()));
@@ -206,7 +224,10 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
     }
 
     protected void preencherCamposDesejo(){
-        // buscar desejo e preencher informações
+        if(idDesejo >= 0){
+            Desejo desejo = db.desejoDao().getDesejoPorId(idDesejo);
+            binding.spinnerLivro.setSelection(desejo.getDesejoId() - 1);
+        }
     }
 
     private void configurarSpinnerTituloLivro() {

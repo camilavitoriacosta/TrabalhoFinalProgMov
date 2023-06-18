@@ -105,15 +105,15 @@ public class PerfilActivity extends AppCompatActivity {
         binding.emailLeitor.setText(leitor.getEmail());
 
         int livrosLidos = db.leituraDao().getLeiturasPorLeitor(idLeitor).size();
-        binding.livrosLidos.setText(getString(R.string.livrosLidos) + livrosLidos);
+        binding.livrosLidos.setText(getString(R.string.livrosLidos) + " " + livrosLidos);
 
         int paginasLidas = db.leituraDao().getQuantidadePaginasLidasPorLeitor(idLeitor);
-        binding.paginasLidas.setText(getString(R.string.paginasLidas) + paginasLidas);
+        binding.paginasLidas.setText(getString(R.string.paginasLidas) + " " + paginasLidas);
 
         String generoLido = db.leituraDao().getGeneroMaisLidoPorLeitor(idLeitor);
         if(generoLido == null){
             generoLido = "-";
         }
-        binding.generoLido.setText(getString(R.string.generoLido) + generoLido);
+        binding.generoLido.setText(getString(R.string.generoLido) + " " + generoLido);
     }
 }
