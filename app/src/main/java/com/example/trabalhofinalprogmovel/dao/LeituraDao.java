@@ -12,7 +12,7 @@ import java.util.List;
 
 @Dao
 public interface LeituraDao {
-    @Query("SELECT * FROM Leitura WHERE livroId = :id LIMIT 1")
+    @Query("SELECT * FROM Leitura WHERE leituraId = :id LIMIT 1")
     Leitura getLeituraPorId(int id);
 
     @Query("SELECT * FROM Leitura WHERE leitorId = :idLeitor")
