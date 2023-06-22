@@ -16,7 +16,9 @@ import com.example.trabalhofinalprogmovel.R;
 import com.example.trabalhofinalprogmovel.database.LocalDatabase;
 import com.example.trabalhofinalprogmovel.databinding.ActivityListaDesejoBinding;
 import com.example.trabalhofinalprogmovel.entities.Desejo;
+import com.example.trabalhofinalprogmovel.entities.Leitura;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListaDesejoActivity extends AppCompatActivity {
@@ -89,6 +91,7 @@ public class ListaDesejoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 intent.putExtra("adicionar_leitura", false);
                 intent.putExtra("id_leitor", idLeitor);
+                intent.putExtra("id_desejo", -1);
                 startActivity(intent);
             }
         });
@@ -97,7 +100,6 @@ public class ListaDesejoActivity extends AppCompatActivity {
         ArrayAdapter<Desejo> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, desejosLeitor);
         lista.setAdapter(adapter);
-        System.out.println(desejosLeitor);
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> adapter, View view,
@@ -105,6 +107,9 @@ public class ListaDesejoActivity extends AppCompatActivity {
                 Desejo desejoSelecionado = desejosLeitor.get(position);
                 intent.putExtra("id_desejo",
                         desejoSelecionado.getDesejoId());
+                intent.putExtra("id_leitor",
+                        idLeitor);
+                intent.putExtra("adicionar_leitura", false);
                 startActivity(intent);
             }
         });
@@ -112,16 +117,25 @@ public class ListaDesejoActivity extends AppCompatActivity {
 
     private void configurarSpinnerGenero(){
         Spinner spinnerGenero = binding.spinnerGenero;
-
         generos = db.livroDao().getLivroGenero();
-        ArrayAdapter<String>  generoAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, generos);
+
+        // Criar lista temporária com texto informativo na primeira posição
+        List<String> generosComTextoInformativo = new ArrayList<>();
+        generosComTextoInformativo.add("Selecione um gênero");
+        generosComTextoInformativo.addAll(generos);
+
+        ArrayAdapter<String> generoAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, generosComTextoInformativo);
         spinnerGenero.setAdapter(generoAdapter);
 
         spinnerGenero.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int posicao, long l) {
-                String generoSelecionado = generos.get(spinnerGenero.getSelectedItemPosition());
-                desejosLeitor = db.desejoDao().getDesejosPorLeitorPorGenero(idLeitor, generoSelecionado);
+                if (posicao > 0) {
+                    String generoSelecionado = generos.get(posicao - 1); // Subtrair 1 para compensar o texto informativo
+                    desejosLeitor = db.desejoDao().getDesejosPorLeitorPorGenero(idLeitor, generoSelecionado);
+                } else {
+                    desejosLeitor = db.desejoDao().getDesejosPorLeitor(idLeitor);
+                }
                 ArrayAdapter<Desejo> adapter = new ArrayAdapter<>(ListaDesejoActivity.this, android.R.layout.simple_list_item_1, desejosLeitor);
                 lista.setAdapter(adapter);
             }

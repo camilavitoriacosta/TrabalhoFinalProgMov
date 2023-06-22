@@ -54,7 +54,7 @@
         android:layout_width="370sp"
         android:layout_height="wrap_content"
         android:layout_marginTop="76dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,9 +62,8 @@
 
         <LinearLayout
             android:id="@+id/generoLinearLayout"
-            android:layout_width="260sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10sp"
             android:orientation="vertical">
 
             <TextView
@@ -84,7 +83,7 @@
 
         <LinearLayout
             android:id="@+id/notaLinearLayout"
-            android:layout_width="100sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 

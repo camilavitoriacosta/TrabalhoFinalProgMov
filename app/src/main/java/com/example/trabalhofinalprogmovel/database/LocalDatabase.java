@@ -21,6 +21,7 @@ public abstract class LocalDatabase extends RoomDatabase {
 
     public static LocalDatabase getDatabase(Context context){
         if (INSTANCE == null){
+            //context.deleteDatabase("ReadingJournal");
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(), LocalDatabase.class, "ReadingJournal").allowMainThreadQueries().build();
         }
         return  INSTANCE;

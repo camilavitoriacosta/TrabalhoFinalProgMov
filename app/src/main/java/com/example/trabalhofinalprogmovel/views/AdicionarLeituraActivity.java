@@ -217,7 +217,12 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
     protected void preencherCamposLeitura(){
         if(idLeitura >= 0){
             Leitura leitura = db.leituraDao().getLeituraPorId(idLeitura);
-            binding.spinnerLivro.setSelection(leitura.getLeituraId() - 1);
+            for (int i = 0; i < livros.size(); i++) {
+                Livro livro = livros.get(i);
+                if (livro.getLivroId() == leitura.getLivroId()) {
+                    binding.spinnerLivro.setSelection(i);
+                }
+            }
             binding.comentarioInput.setText(leitura.getComentario());
             binding.notaInput.setText(Integer.toString(leitura.getNota()));
         }
@@ -226,7 +231,13 @@ public class AdicionarLeituraActivity extends AppCompatActivity {
     protected void preencherCamposDesejo(){
         if(idDesejo >= 0){
             Desejo desejo = db.desejoDao().getDesejoPorId(idDesejo);
-            binding.spinnerLivro.setSelection(desejo.getDesejoId() - 1);
+
+            for (int i = 0; i < livros.size(); i++) {
+                Livro livro = livros.get(i);
+                if(livro.getLivroId() == desejo.getLivroId()){
+                    binding.spinnerLivro.setSelection(i);
+                }
+            }
         }
     }
 
